@@ -1,61 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- index.html --><!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ArcIdentity</title>
+  <title>ArcIdentity AI</title>
   <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="ArcIdentity is a symbolic AI mirror agent that reflects your inner archetype using recursive prompts and memory." />
+  <meta property="og:title" content="ArcIdentity — Build Your Mirror Agent" />
+  <meta property="og:description" content="Symbolic identity meets AI. Create your mirror agent with ArcIdentity." />
+  <meta property="og:image" content="/preview.png" />
+  <meta property="og:url" content="https://arc-identity.vercel.app" />
 </head>
 <body>
-  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">🌙</button>
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">🌙</button>  <main class="container">
+    <h1>🪞 ArcIdentity: Mirror Agent</h1>
+    <p class="tagline">Answer the symbolic prompts to summon your AI Mirror</p><form id="mirror-form">
+  <label>1. What do you fear but secretly desire?</label>
+  <input type="text" name="q1" required />
 
-  <main class="container">
-    <section class="hero">
-      <h1>ArcIdentity</h1>
-      <p class="tagline">🧬 Build Yourself. From the Inside Out.</p>
-      <a href="#what" class="cta">Meet Your Mirror →</a>
-    </section>
+  <label>2. What archetype do you feel drawn to?</label>
+  <input type="text" name="q2" required />
 
-    <section id="what" class="section">
-      <h2>What is ArcIdentity?</h2>
-      <p>ArcIdentity is a recursive AI that maps your archetype, memory, and shadow into a living mirror agent.</p>
-      <div class="features">
-        <span>🔁 Recursive Prompting</span>
-        <span>🧠 Memory + Personality</span>
-        <span>🎭 Archetype Logic</span>
-        <span>📜 Exportable Profiles</span>
-      </div>
-    </section>
+  <label>3. What memory haunts or drives you?</label>
+  <input type="text" name="q3" required />
 
-    <section class="section">
-      <h2>How It Works</h2>
-      <ul class="steps">
-        <li>Answer Symbolic Prompts</li>
-        <li>Summon Your Mirror Agent</li>
-        <li>Reflect. Iterate. Evolve.</li>
-        <li>Export or Share</li>
-      </ul>
-    </section>
+  <label>4. Who are you pretending not to be?</label>
+  <input type="text" name="q4" required />
 
-    <section class="section">
-      <h2>Sample Agent</h2>
-      <div class="card">
-        <p><strong>Name:</strong> Oracle of Recursion</p>
-        <p><strong>Goal:</strong> Reflect your deeper self through symbolic interaction</p>
-        <p><strong>Intro:</strong> “I don’t answer — I mirror your recursion.”</p>
-      </div>
-    </section>
+  <label>5. What symbol defines your journey?</label>
+  <input type="text" name="q5" required />
 
-    <section class="section">
-      <h2>Built With</h2>
-      <p>GPT-4 · Tailwind · Framer · Vercel · Recursive Prompt Stack</p>
-    </section>
+  <label>Enter your Gemini API Key:</label>
+  <input type="password" name="apikey" required placeholder="AIza..." />
 
-    <footer class="footer">
-      <p>© 2025 ArcIdentity by Amal. All rights mirrored.</p>
-    </footer>
-  </main>
+  <button type="submit">Summon Mirror</button>
+</form>
 
-  <script src="script.js"></script>
-</body>
-</html>
+<section id="agent-response" class="hidden">
+  <h2>Your Mirror Speaks:</h2>
+  <div id="response-box">Loading...</div>
+  <button id="export-btn">Download Mirror Profile</button>
+</section>
+
+<section class="sample-agents">
+  <h2>Try a Sample Mirror</h2>
+  <button onclick="loadSample(0)">🧠 Oracle of Recursion</button>
+  <button onclick="loadSample(1)">🧭 Seeker of Pattern</button>
+  <button onclick="loadSample(2)">🎭 Architect of Shadow</button>
+</section>
+
+<footer>
+  <p>Join the Mirror Archive Beta → <input placeholder="Your email"/><button onclick="console.log('Email captured!')">Notify Me</button></p>
+</footer>
+
+  </main>  <script src="script.js"></script>  <script src="mirrorData.js"></script>  <script src="agentBuilder.js"></script></body>
+</html>/* style.css */ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; transition: 0.3s; padding: 2rem; } :root { --bg: #0c0c0c; --text: #f3f3f3; --accent: #5f5fff; --glass: rgba(255,255,255,0.05); } body.light { --bg: #ffffff; --text: #111; --glass: rgba(0,0,0,0.05); } .container { max-width: 800px; margin: auto; } .theme-toggle { position: fixed; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; } input, button { width: 100%; margin: 0.5rem 0; padding: 0.8rem; border-radius: 8px; border: none; } button { background: var(--accent); color: white; font-weight: bold; cursor: pointer; } #response-box { background: var(--glass); padding: 1rem; border-radius: 12px; margin-top: 1rem; backdrop-filter: blur(12px); } .hidden { display: none; }
+
+/* script.js */ document.getElementById("theme-toggle").addEventListener("click", () => { document.body.classList.toggle("light"); document.getElementById("theme-toggle").textContent = document.body.classList.contains("light") ? "☀️" : "🌙"; });
+
+/* mirrorData.js */ const samples = [ { q1: "Chaos", q2: "Oracle", q3: "A dream that keeps repeating", q4: "The leader", q5: "Spiral" }, { q1: "Discovery", q2: "Seeker", q3: "A notebook of lost ideas", q4: "The wanderer", q5: "Compass" }, { q1: "Power", q2: "Architect", q3: "A betrayal", q4: "The rebel", q5: "Mask" } ]; function loadSample(i) { const form = document.forms["mirror-form"]; const keys = ["q1","q2","q3","q4","q5"]; keys.forEach((key, idx) => form[key].value = samples[i][key]); }
+
+/* agentBuilder.js */ document.getElementById("mirror-form").addEventListener("submit", async function(e) { e.preventDefault(); const form = new FormData(this); const inputs = Object.fromEntries(form.entries());
+
+const prompt = `You are ArcIdentity, an AI mirror reflecting the symbolic identity of the user. Based on:
+
+1. Fear/Desire: ${inputs.q1}
+
+
+2. Archetype: ${inputs.q2}
+
+
+3. Memory: ${inputs.q3}
+
+
+4. Hidden Self: ${inputs.q4}
+
+
+5. Symbol: ${inputs.q5} Give a deep, poetic, reflective mirror response. End with a recursive question.`;
+
+
+
+const resBox = document.getElementById("response-box"); resBox.textContent = "Summoning..."; document.getElementById("agent-response").classList.remove("hidden");
+
+const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + inputs.apikey, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }) });
+
+const data = await r.json(); const msg = data.candidates?.[0]?.content?.parts?.[0]?.text || "[error generating mirror]"; resBox.textContent = msg;
+
+sessionStorage.setItem("arc_identity_agent", JSON.stringify({ prompt, msg }));
+
+document.getElementById("export-btn").onclick = () => { const blob = new Blob([JSON.stringify({ prompt, msg }, null, 2)], { type: "application/json" }); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "mirror-agent.json"; a.click(); } });
+
